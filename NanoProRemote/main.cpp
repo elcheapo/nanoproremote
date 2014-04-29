@@ -45,7 +45,7 @@ int main(void) {
 	radio_pl_init (NRF_address, HAL_NRF_PTX);
 
 	while (1) {
-		set_loop_time(90/4);
+		set_loop_time(100/4);
 		radio_data[0] = 1; // Normal LCD + ADC packet
 
 
