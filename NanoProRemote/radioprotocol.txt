@@ -1,0 +1,33 @@
+Definition of radio protocol between NRF24L01P chips.
+
+One NRF24L01P is configured in PRX : primary Receiver mode - can receive from up to 6 transmitters
+
+The other NRF24L01P are in PTX : Primary Transmiter mode - sends a packet, wait for ACK or ACK + data.
+
+PTX to PRX packets :
+// Full Station 
+(length=1)
+<0> : request ACK Data packet : transmitter received only an ACK packet without data, trying to get a new ACK + Data packet
+
+(length=13)
+<1> <column[0]> <column[1]> <column[2]> <column[3]> <adch[0]> <adcl[0]> <adch[1]> <adcl[1]> <adch[2]> <adcl[2]> <adch[3]> <adcl[3]> 
+    Keypad data                                     adc values for pot. position
+
+// Single remote (length=7)
+<2> <ID> <D4D5D6D7> <adch[0]> <adcl[0]> <adch[1]> <adcl[1]> 
+
+
+
+ACK Packets PRX to PTX :
+// Full station
+Ack : Display Line - length = 14
+<1> <Line 0-5> <char> <char> <char> <char> <char> <char> <char> <char> <char> <char> <char> <char>
+
+Ack : Display pseudo LED - length = 12
+<2> <LED> <LED> <LED> <LED> <LED> <LED> <LED> <LED> <LED> <LED> (0:OFF, 1:ON, 2: Half_ON) 
+
+// Single Remote
+Only ACK : default
+(length = 2)
+<3> <ID>  
+If a remote receives an <Ack + Data> packet, it will change the ID of the packet to the received ID value (only if the current ID is 0)

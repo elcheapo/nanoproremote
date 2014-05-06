@@ -28,7 +28,7 @@ void adc_init(void) {
 	ADMUX = analog_ref
 			|(0<<ADLAR) // Right justified result
 			|(0<<MUX3)|(0<<MUX2)|(0<<MUX1)|(0<<MUX0);
-	DIDR0 = 0x0f; // disable digital Input pin
+	DIDR0 = 0x0a; // disable digital Input pin on Channel3 0 / 2
 
 }
 

@@ -20,8 +20,6 @@ int16_t adc_value;
 uint8_t radio_data[RF_PAYLOAD_LENGTH];
 
 int main(void) {
-	uint8_t key,i;
-	bool connected;
 	uint8_t status;
 	uint8_t count;
 	bool extra_packet;
@@ -41,11 +39,10 @@ int main(void) {
 	// enable interrupts
 	__builtin_avr_sei ();
 
-	connected=false;
 	radio_pl_init (NRF_address, HAL_NRF_PTX);
 
 	while (1) {
-		set_loop_time(100/4);
+		set_loop_time(200/4);
 		radio_data[0] = 1; // Normal LCD + ADC packet
 
 
