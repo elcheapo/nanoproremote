@@ -29,11 +29,8 @@ void init_timer0_tick(void) {
     		|(0 << CS01)
     		|(0 << CS00);
     TIMSK0 = (1<<TOV0); // interrupt on overflow every 4.096 ms
-#ifdef RADIO1
-    OCR0A = 0x30;   // 30/FF% duty cycle on lcd backlight ...
-#else
-    OCR0A = 0x40;   // 40/FF% duty cycle on lcd backlight ...
-#endif
+
+    OCR0A = 0;
     OCR0B = 0; // not used
     TCNT0=0x00;
     timeout = 0;

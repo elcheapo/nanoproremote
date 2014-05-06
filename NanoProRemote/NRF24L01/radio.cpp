@@ -34,6 +34,8 @@ const uint8_t NRF_address[HAL_NRF_AW_5BYTES] = {0xa5,'h','c','l','E'};
 const uint8_t NRF_address[HAL_NRF_AW_5BYTES] = {0x55,'h','c','l','E'};
 #endif
 
+const uint8_t NRF_address[HAL_NRF_AW_5BYTES] = {0x5a,'h','c','l','E'};
+
 void radio_send_packet(uint8_t *packet, uint8_t length) {
 	hal_nrf_write_tx_payload(packet, length);      // load message into radio
 	CE_PULSE();                                 // send packet
