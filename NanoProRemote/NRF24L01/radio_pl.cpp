@@ -73,6 +73,7 @@ void radio_pl_init (const uint8_t *address, hal_nrf_operation_mode_t operational
 		hal_nrf_write_reg(CONFIG, 0b00001111);
 		// IRQ on, EN_CRC, 2 bytes CRC, PWR UP, PRX
 	}
+	wait_tempo(2);
 	hal_nrf_write_reg(STATUS, 0x70);
 	// Clear pending IRQ
 #ifdef DEBUG
@@ -114,7 +115,6 @@ void radio_pl_init (const uint8_t *address, hal_nrf_operation_mode_t operational
 	Serial.println(hal_nrf_read_reg(CONFIG),16);
 #endif
 
-	wait_tempo(2);
 
 	// start_timer(RF_POWER_UP_DELAY);                // Wait for the radio to
 	// wait_for_timer();                              // power up
