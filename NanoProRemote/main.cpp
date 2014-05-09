@@ -10,6 +10,7 @@
 #include "elcheapo_remote.h"
 #include "adc.h"
 #include "timer0.h"
+#include "HardwareSerial.h"
 
 #include "hal_nrf_reg.h"
 #include "hal_nrf.h"
