@@ -69,7 +69,7 @@ int main(void) {
 
 		hal_nrf_get_clear_irq_flags();
 		radio_send_packet(radio_data, 13);
-		Serial.write('<.');
+		Serial.write('<');
 		set_timeout(70);
 
 		while (!radio_activity()) {
