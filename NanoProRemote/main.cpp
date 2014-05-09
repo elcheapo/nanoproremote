@@ -1,8 +1,9 @@
 /*
  * main.c
  *
- *  Created on: Mar 31, 2013
+ *  Created on: May 1st 2014
  *      Author: francois
+ *      Nano Pro Remote project
  */
 
 
@@ -14,7 +15,6 @@
 #include "hal_nrf.h"
 
 #include "radio.h"
-#include "radio_pl.h"
 
 int16_t adc_value;
 uint8_t radio_data[RF_PAYLOAD_LENGTH];
@@ -32,18 +32,19 @@ int main(void) {
 	PORTB = PORTB_DIRECTION;
 	PORTD = PORTD_DIRECTION;
 	// Control Port C Digital disabled
-	DIDR0 = 0x0a; // disable digital Input pin on Channel3 0 / 2
+	DIDR0 = 0x05; // disable digital Input pin on Channel 0 / 2
 	PORTC = 0x00; // Output as Zero on C1 and C3
 
 	// set CE low (transmit packet when CE pulsed high)
 	CE_LOW();
 
+	Serial.begin(115200);
 	adc_init();
 	init_timer0_tick();
 	// enable interrupts
 	__builtin_avr_sei ();
 
-	radio_pl_init (NRF_address, HAL_NRF_PTX);
+	radio_pl_init_ptx (NRF_address);
 
 	while (1) {
 		set_loop_time(200/4);
@@ -67,6 +68,7 @@ int main(void) {
 
 		hal_nrf_get_clear_irq_flags();
 		radio_send_packet(radio_data, 13);
+		Serial.write('<.');
 		set_timeout(70);
 
 		while (!radio_activity()) {
@@ -77,6 +79,7 @@ int main(void) {
 		case (1<<HAL_NRF_TX_DS):
 			/* Tx packet sent, ack received but no ack packet payload ... */
 			hal_nrf_get_clear_irq_flags();
+		Serial.write('>');
 			break;
 		case ((1<<HAL_NRF_TX_DS)|(1<<HAL_NRF_RX_DR)):
 			/* Tx done, Ack packet received */
@@ -88,6 +91,7 @@ int main(void) {
 			if ( (count == 2) && (radio_data[0] == 3) && (ID == 0) ){
 				ID = radio_data[1];
 			}
+			Serial.write('I');
 			break;
 		case (1<<HAL_NRF_MAX_RT):
 			hal_nrf_get_clear_irq_flags();

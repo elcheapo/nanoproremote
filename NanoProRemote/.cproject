@@ -67,8 +67,17 @@
 							<tool id="de.innot.avreclipse.tool.avrdude.app.debug.44211980" name="AVRDude" superClass="de.innot.avreclipse.tool.avrdude.app.debug"/>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="de.innot.avreclipse.configuration.app.debug.173618585.638320711" name="radio_pl.cpp" rcbsApplicability="disable" resourcePath="NRF24L01/radio_pl.cpp" toolsToInvoke="de.innot.avreclipse.tool.cppcompiler.app.debug.2028668104.55516133">
+						<tool id="de.innot.avreclipse.tool.cppcompiler.app.debug.2028668104.55516133" name="AVR C++ Compiler" superClass="de.innot.avreclipse.tool.cppcompiler.app.debug.2028668104"/>
+						<tool customBuildStep="true" id="org.eclipse.cdt.managedbuilder.ui.rcbs.1851377829" name="Resource Custom Build Step">
+							<inputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.inputtype.1362257922" name="Resource Custom Build Step Input Type">
+								<additionalInput kind="additionalinputdependency" paths=""/>
+							</inputType>
+							<outputType id="org.eclipse.cdt.managedbuilder.ui.rcbs.outputtype.1272811183" name="Resource Custom Build Step Output Type"/>
+						</tool>
+					</fileInfo>
 					<sourceEntries>
-						<entry excluding="NRF24L01/hal_nrf_l01.cpp|NRF24L01/application_pl.h|NRF24L01/main.c|NRF24L01/application_pl.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="NRF24L01/radio_pl.cpp|NRF24L01/hal_nrf_l01.cpp|NRF24L01/application_pl.h|NRF24L01/main.c|NRF24L01/application_pl.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

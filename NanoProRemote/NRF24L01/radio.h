@@ -45,6 +45,17 @@
 #define RF_RETRANS_DELAY 500
 #endif
 
+#define ALL_PIPES (0x3F)
+
+/** Initializes the radio in Enhanced ShockBurst mode with ACK payload. This mean that we
+ * enable auto-retransmit and auto-acknowledgment as in Enhanced ShockBurst, and the
+ * features auto-ack payload and dynamic payload width.
+ *
+ * @param address The radios working address
+ * @param operational_mode The operational mode, either @c HAL_NRF_PRX or @c HAL_NRF_PTX
+ */
+void radio_pl_init_ptx (const uint8_t *address);
+
 extern const uint8_t NRF_address[];
 
 /** Enumerates the different states the radio may
