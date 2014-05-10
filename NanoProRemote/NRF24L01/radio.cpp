@@ -49,7 +49,6 @@ void radio_pl_init_ptx (const uint8_t *address) {
 	uint8_t buffer[6];
 #endif
 	hal_spi_init(8000000);						// Init SPI at 8 MHz
-
 	CE_LOW();        // Set Chip Enable (CE) pin low during chip init
 
 	hal_nrf_write_reg(EN_RXADDR, 0);	 // First close all radio pipes
