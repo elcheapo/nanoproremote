@@ -47,6 +47,9 @@ int main(void) {
 
 	radio_pl_init_ptx (NRF_address);
 
+	Serial.println(F("Nano Pro Remote"));
+
+
 	while (1) {
 		set_loop_time(200/4);
 		radio_data[0] = 2; // See radioprotocol.txt
@@ -64,23 +67,35 @@ int main(void) {
 		wait_tempo(2);
 		adc_value = get_adc(2);
 		PORTC &= ~(1<<PC3_POT);
-		radio_data[3]=adc_value >> 8;
-		radio_data[4]=adc_value & 0xff;
+		radio_data[5]=adc_value >> 8;
+		radio_data[6]=adc_value & 0xff;
 
 		hal_nrf_get_clear_irq_flags();
-		radio_send_packet(radio_data, 13);
+		for (uint8_t i=0; i<7; i++) {
+			Serial.write(' ');
+			Serial.print(radio_data[i],16);
+		}
+		Serial.println();
+
+		radio_send_packet(radio_data, 7);
 		Serial.write('<');
 		set_timeout(70);
 
 		while (!radio_activity()) {
-			if (check_timeout()) break;
+			if (check_timeout()) {
+				Serial.write('T');
+				break;
+			}
 		};
 		status = hal_nrf_get_status();
+		Serial.print(F("St:"));
+		Serial.println(status,16);
+
 		switch (status & 0x70) {
 		case (1<<HAL_NRF_TX_DS):
 			/* Tx packet sent, ack received but no ack packet payload ... */
 			hal_nrf_get_clear_irq_flags();
-		Serial.write('>');
+			Serial.write('>');
 			break;
 		case ((1<<HAL_NRF_TX_DS)|(1<<HAL_NRF_RX_DR)):
 			/* Tx done, Ack packet received */
