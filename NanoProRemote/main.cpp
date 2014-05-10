@@ -40,6 +40,7 @@ int main(void) {
 	CE_LOW();
 
 	Serial.begin(115200);
+	Serial.println(F("Arduino Nano Remote"));
 	adc_init();
 	init_timer0_tick();
 	// enable interrupts
@@ -48,6 +49,7 @@ int main(void) {
 	radio_pl_init_ptx (NRF_address);
 
 	while (1) {
+		Serial.write('L');
 		set_loop_time(200/4);
 		radio_data[0] = 2; // See radioprotocol.txt
 		radio_data[1] = ID;
@@ -64,11 +66,11 @@ int main(void) {
 		wait_tempo(2);
 		adc_value = get_adc(2);
 		PORTC &= ~(1<<PC3_POT);
-		radio_data[3]=adc_value >> 8;
-		radio_data[4]=adc_value & 0xff;
+		radio_data[5]=adc_value >> 8;
+		radio_data[6]=adc_value & 0xff;
 
 		hal_nrf_get_clear_irq_flags();
-		radio_send_packet(radio_data, 13);
+		radio_send_packet(radio_data, 7);
 		Serial.write('<');
 		set_timeout(70);
 
