@@ -73,12 +73,12 @@
 #define PortD1 			1		// out (TX)
 #define PD_NRF_IRQ		2		// in (INT0)
 #define PD_NRF_CE		3		// out
-#define PD_PortD4		4		// out
-#define PD_PortD5		5		// out
-#define PD_L298_IN1		6		// out
-#define PD_L298_IN2		7		// out
+#define PD_PortD4		4		// in
+#define PD_PortD5		5		// in
+#define PD_PortD6		6		// in
+#define PD_PortD7		7		// in
 
-#define PORTD_DIRECTION	((uint8_t)0xfa)   	// Output PINs for PORTD
+#define PORTD_DIRECTION	((uint8_t)0x0a)   	// Output PINs for PORTD
 
 //========================================================================
 // 3. System Definitions

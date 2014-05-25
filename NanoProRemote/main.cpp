@@ -31,7 +31,8 @@ int main(void) {
 	DDRD=PORTD_DIRECTION;
 	//set output I/O to 1, Input to no pull-up
 	PORTB = PORTB_DIRECTION;
-	PORTD = PORTD_DIRECTION;
+	// Pull ups on input pin on PORTD
+	PORTD = 0xf0;
 	// Control Port C Digital disabled
 	DIDR0 = 0x05; // disable digital Input pin on Channel 0 / 2
 	PORTC = 0x00; // Output as Zero on C1 and C3
